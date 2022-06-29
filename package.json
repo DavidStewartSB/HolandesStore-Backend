@@ -1,0 +1,19 @@
+{
+  "name": "eshop",
+  "version": "1.0.0",
+  "description": "backend do ecommerce",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Stewart",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.4.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.18"
+  }
+}
