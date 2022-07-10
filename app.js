@@ -25,10 +25,11 @@ app.use(`${api}/orders`, ordersRoutes);
 
 //Connect Database
 mongoose.connect(process.env.CONNECTION_STRING).then(() => {
-    console.log('Database Ruunning')
+    console.log('Banco de dados rodando...')
 }).catch((err) => {
     console.log(err)
 })
+//Server
 app.listen(3000, () => {
-    console.log('server is ruunning http://localhost:3000')
+    console.log('server na porta http://localhost:3000')
 })
