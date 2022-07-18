@@ -3,10 +3,13 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const cors = require('cors')
 
 require('dotenv/config')
 
 //Middleware
+app.use(cors());
+app.options('*', cors());
 app.use(express.json()) //antes era app.use(bodyParser.json());
 app.use(morgan('tiny')) //log das request no terminal
 
@@ -25,7 +28,7 @@ app.use(`${api}/orders`, ordersRoutes);
 
 //Connect Database
 mongoose.connect(process.env.CONNECTION_STRING).then(() => {
-    console.log('Banco de dados rodando...')
+    console.log('Conexão com banco: Completa!')
 }).catch((err) => {
     console.log(err)
 })
