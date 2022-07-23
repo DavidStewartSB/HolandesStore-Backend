@@ -43,7 +43,7 @@ router.put(`/:id`, async(req, res)=> {
     res.send(category)
 })
 router.delete(`/:id`, async(req, res)=> {
-    Category.findByIdAndRemove(req.params.id).then(category => {
+    await Category.findByIdAndRemove(req.params.id).then(category => {
         if(category){
             return res.status(200).json({seccess: true, message: 'Sucesso ao deletar Categoria!', category})
         } else {

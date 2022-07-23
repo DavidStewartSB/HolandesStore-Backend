@@ -3,15 +3,17 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const cors = require('cors')
+const cors = require('cors');
+const authJwt = require('./helpers/jwt');
 
 require('dotenv/config')
 
-//Middleware
 app.use(cors());
 app.options('*', cors());
+//Middlewares
 app.use(express.json()) //antes era app.use(bodyParser.json());
 app.use(morgan('tiny')) //log das request no terminal
+app.use(authJwt())
 
 //Routes
 const categoriesRoutes = require('./routes/categories');
