@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const authJwt = require('./helpers/jwt');
+const errorHandler = require('./helpers/error-handler')
 
 require('dotenv/config')
 
@@ -14,6 +15,7 @@ app.options('*', cors());
 app.use(express.json()) //antes era app.use(bodyParser.json());
 app.use(morgan('tiny')) //log das request no terminal
 app.use(authJwt())
+app.use(errorHandler)
 
 //Routes
 const categoriesRoutes = require('./routes/categories');
