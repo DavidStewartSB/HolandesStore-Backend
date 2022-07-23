@@ -11,7 +11,7 @@ router.get(`/`, async (req, res)=> {
     }
     const productList = await Product.find(filter).populate('category');
     if (!productList){
-        res.status(500).json({success: false})
+        res.status(400).json({success: false})
     }
     res.send(productList);
 })

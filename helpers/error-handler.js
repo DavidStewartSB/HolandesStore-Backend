@@ -1,14 +1,12 @@
-function errorHandler(err, req, req, next){
-    if(err.name === "UnauthorizedError"){
-        // hwt authentication error
-        res.status(500).json({message: 'Usuário não autorizado'})
+function errorHandler(err, req, res, next) {
+    if (err.name === 'UnauthorizedError'){
+        return res.status(401).json({message: 'O usuário não tem autorização'})
     }
-    if(err.name === "ValidationError"){
-        //validation error
-       return res.status(401).json({message: "Usuário não validado"})
+    if(err.name === 'ValidationError') {
+        return res.status(401).json({message: 'Erro de validação'})
     }
-    // default to 500 server error
-    return res.status(500).json({message: "Erro no servidor"})
+
+    return res.status(500).json({message: 'erro no servidor'})
 }
 
 module.exports = errorHandler;
