@@ -45,7 +45,7 @@ const userSchema = mongoose.Schema({
 userSchema.virtual('id').get(function(){
     return this._id.toHexString();
 })
-userSchema.get('toJSON', {
+userSchema.set('toJSON', {
     virtuals: true
 })
 

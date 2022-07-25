@@ -21,6 +21,15 @@ router.get(`/:id`, async (req, res)=>{
     }
     res.send(user)
 })//--GetById
+router.get(`/get/count/`, async (req, res) => {
+    const userCount = User.countDocuments((count) => count)
+    if(!userCount) {
+        res.status(500).json({success: false})
+    }
+    res.send({
+        userCount: userCount
+    })
+})
 router.post(`/`, async (req,res) =>{
     let user = new User({
         name : req.body.name,
@@ -82,7 +91,7 @@ router.post(`/login`, async (req, res)=>{
     if(!user){
         return res.status(400).send('Usuário não encontrado')
     }
-    if(user && bcrypt.compareSync(req.body.password, user.passwordHash)){
+    if( user && bcrypt.compareSync(req.body.password, user.passwordHash)){
         const token = jwt.sign(
             {
                 userId: user.id,
