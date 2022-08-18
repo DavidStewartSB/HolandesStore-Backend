@@ -11,8 +11,7 @@ const orderSchema = mongoose.Schema({
         required: true
     },
     shippingAddress2: {
-        type: String,
-        default: ''
+        type: String
     },
     city: {
         type: String,
@@ -36,8 +35,7 @@ const orderSchema = mongoose.Schema({
         default: 'Pending'
     },
     totalPrice: {
-        type: Number,
-        required: true
+        type: String
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
