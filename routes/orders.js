@@ -94,7 +94,35 @@ router.delete('/:id', async (req, res) => {
         return res.status(500).json({success: false, error: err})
     })
 })
+router.get('/get/totalsales', async (req, res) => {
+    const totalSales = await Order.aggregate([ //agrupa relacionamentos do banco de dados
+        {$group: {_id: null, totalSales : {$sum : '$totalPrice'}}}//totalPrice é um campo de "Order"
+    ])
+    if(!totalSales) return res.status(400).json({success: false, message: "As vendas do produto não podem ser geradas"})
+    
+    res.send({totalSales: totalSales.pop().totalSales})
 
+})
+router.get(`/get/count`, async (req, res) => {
+    const orderCount = await Order.countDocuments() ;
+
+    if(!orderCount){
+        return res.status(500).json({success: false})
+    } 
+
+    res.send({orderCount: orderCount})
+})
+router.get(`/get/userorders/:userid`, async (req, res) => {
+    const userOrdersList = await Order.find({user: req.params.userid}).populate({
+        path: 'orderItems', populate: {
+            path: 'product', poulate: 'category'}
+    }).sort({'dateOrdered': -1})
+
+    if(!userOrdersList) {
+        res.status(500).json({success: false})
+    }
+    res.send(userOrdersList)
+})
 
 module.exports = router;
 
