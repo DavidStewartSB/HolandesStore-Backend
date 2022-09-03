@@ -15,6 +15,7 @@ app.options('*', cors());
 app.use(express.json()) //antes era app.use(bodyParser.json());
 app.use(morgan('tiny')) //log das request no terminal
 app.use(authJwt())
+app.use('/public/upload', express.static(__dirname + '/public/upload'))
 app.use(errorHandler)
 
 //Routes
