@@ -32,7 +32,7 @@ const orderSchema = mongoose.Schema({
     status: {
         type: String,
         required: true,
-        default: 'Pending'
+        default: 'Pendente'
     },
     totalPrice: {
         type: String
