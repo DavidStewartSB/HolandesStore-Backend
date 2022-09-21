@@ -35,7 +35,7 @@ const orderSchema = mongoose.Schema({
         default: 'Pendente'
     },
     totalPrice: {
-        type: String
+        type: Number
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,

@@ -67,7 +67,7 @@ router.get(`/get/featured/:count`, async(req, res)=> {
     const count = req.params.count ? req.params.count : 0
     const products = await Product.find({isFeatured: true}).limit(+count)
     if(!products){
-        res.status(500).json({success: false, mensage: 'Erro ao efetuar consulta'})
+        res.status(500).json({success: false, message: 'Erro ao efetuar consulta'})
     } 
     res.send(products)
 })
@@ -166,7 +166,7 @@ router.delete(`/:id`, async(req,res)=>{
         if(product){
             return res.status(200).json({success: true, message: 'Produto removido com sucesso!', product})
         } else {
-            return res.status(404).json({sucess: false, message: 'Erro ao tentar encontrar o produto'})
+            return res.status(404).json({success: false, message: 'Erro ao tentar encontrar o produto'})
         }
     }).catch(err=>{
         return res.status(500).json({success: false, error: err})

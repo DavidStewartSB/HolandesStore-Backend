@@ -21,14 +21,19 @@ router.get(`/:id`, async (req, res)=>{
     }
     res.send(user)
 })//--GetById
-router.get(`/get/count/`, async (req, res) => {
-    const userCount = User.countDocuments((count) => count)
-    if(!userCount) {
-        res.status(500).json({success: false})
-    }
-    res.send({
-        userCount: userCount
-    })
+router.get(`/get/counts`, (req, res) => {
+    User.countDocuments().then(count => {
+        if (count) {
+            return res.status(200).json({ userCount: count });
+        } else {
+            return res.status(500).json({ success: false });
+        }
+    }).catch(err => {
+        return res.status(400).json({
+            success: false,
+            error: err
+        })
+    });
 })
 router.post(`/`, async (req,res) =>{
     let user = new User({
